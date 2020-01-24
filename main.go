@@ -18,7 +18,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
     case "GET":
 		if data[r.URL.Path] != nil { 
-			fmt.Fprintf(w, data[r.URL.Path].value+"\n")
+			fmt.Fprintf(w, data[r.URL.Path].value)
 		} else { 
 			w.WriteHeader(http.StatusNotFound) 
 		} 
