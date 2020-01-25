@@ -47,5 +47,5 @@ func main() {
 	go clean()
 
 	http.HandleFunc("/", handler)
-	http.ListenAndServe(":1337", nil)
+	http.ListenAndServe(":8080", nil)
 }
