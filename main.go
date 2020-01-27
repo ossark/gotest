@@ -17,11 +17,11 @@ var data = make(map[string]*item)
 func handler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
     case "GET":
-		if data[r.URL.Path] != nil { 
+		if data[r.URL.Path] != nil && time.Now().Before(data[r.URL.Path].expiry){
 			fmt.Fprintf(w, data[r.URL.Path].value)
-		} else { 
+		} else {
 			w.WriteHeader(http.StatusNotFound) 
-		} 
+		}
     case "POST":
     	body, err := ioutil.ReadAll(r.Body)
     	if err == nil { 
@@ -39,7 +39,7 @@ func clean() {
 			if time.Now().After(value.expiry) {
 				delete(data, key)
 			}
-		} 
+		}
 	}
 }
 
